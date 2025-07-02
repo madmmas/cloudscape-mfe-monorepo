@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  host-dev:
+    build:
+      context: .
+      dockerfile: host/Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./host:/app/host
+      - /app/host/node_modules
+    depends_on:
+      - dashboard-dev
+      - orders-dev
+    networks:
+      - mfe-network
+    environment:
+      - NODE_ENV=development
+
+  dashboard-dev:
+    build:
+      context: .
+      dockerfile: mfe-dashboard/Dockerfile.dev
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./mfe-dashboard:/app/mfe-dashboard
+      - /app/mfe-dashboard/node_modules
+    networks:
+      - mfe-network
+    environment:
+      - NODE_ENV=development
+
+  orders-dev:
+    build:
+      context: .
+      dockerfile: mfe-orders/Dockerfile.dev
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./mfe-orders:/app/mfe-orders
+      - /app/mfe-orders/node_modules
+    networks:
+      - mfe-network
+    environment:
+      - NODE_ENV=development
+
+networks:
+  mfe-network:
+    driver: bridge 

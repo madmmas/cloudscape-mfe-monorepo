@@ -1,0 +1,19 @@
+{
+  "name": "cloudscape-mfe-monorepo",
+  "private": true,
+  "devDependencies": {
+    "@originjs/vite-plugin-federation": "^1.4.1",
+    "turbo": "^1.10.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
+  "workspaces": [
+    "host",
+    "mfe-dashboard",
+    "mfe-orders"
+  ]
+}

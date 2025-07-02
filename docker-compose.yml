@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  host:
+    build:
+      context: .
+      dockerfile: host/Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - dashboard
+      - orders
+    networks:
+      - mfe-network
+    environment:
+      - NODE_ENV=production
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: mfe-dashboard/Dockerfile
+    ports:
+      - "3001:80"
+    networks:
+      - mfe-network
+    environment:
+      - NODE_ENV=production
+
+  orders:
+    build:
+      context: .
+      dockerfile: mfe-orders/Dockerfile
+    ports:
+      - "3002:80"
+    networks:
+      - mfe-network
+    environment:
+      - NODE_ENV=production
+
+networks:
+  mfe-network:
+    driver: bridge 

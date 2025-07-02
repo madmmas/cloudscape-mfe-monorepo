@@ -1,0 +1,4 @@
+packages:
+  - 'host'
+  - 'mfe-dashboard'
+  - 'mfe-orders'
